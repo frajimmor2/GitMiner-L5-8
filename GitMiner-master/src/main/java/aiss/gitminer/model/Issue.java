@@ -1,13 +1,13 @@
 
 package aiss.gitminer.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import org.hibernate.annotations.DialectOverride;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
 
-import javax.annotation.Generated;
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 @Entity
@@ -20,34 +20,47 @@ public class Issue {
 
     @JsonProperty("ref_id")
     private String refId;
+
     @JsonProperty("title")
+    @Lob
+    @Column(columnDefinition = "LONGTEXT", length = 5000)
     private String title;
+
     @JsonProperty("description")
-    @Column(columnDefinition="TEXT")
+    @Lob
+    @Column(columnDefinition = "LONGTEXT", length = 5000)
     private String description;
+
     @JsonProperty("state")
     private String state;
 
     @JsonProperty("created_at")
     private String createdAt;
+
     @JsonProperty("updated_at")
     private String updatedAt;
+
     @JsonProperty("closed_at")
     private String closedAt;
+
     @JsonProperty("labels")
     @ElementCollection
     private List<String> labels;
+
     @JsonProperty("author")
     //@NotEmpty(message = "The author of the issue cannot be empty")
-    @JoinColumn(name = "author_id",referencedColumnName = "id")
-    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     private User author;
+
     @JsonProperty("assignee")
-    @JoinColumn(name = "assignee_id",referencedColumnName = "id")
-    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "assignee_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
     private User assignee;
+
     @JsonProperty("upvotes")
     private Integer upvotes;
+
     @JsonProperty("downvotes")
     private Integer downvotes;
 
@@ -59,124 +72,8 @@ public class Issue {
     @JoinColumn(name = "issueId")
     private List<Comment> comments;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getRefId() {
-        return refId;
-    }
-
-    public void setRefId(String refId) {
-        this.refId = refId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getClosedAt() {
-        return closedAt;
-    }
-
-    public void setClosedAt(String closedAt) {
-        this.closedAt = closedAt;
-    }
-
-    public List<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public User getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
-    }
-
-    public Integer getUpvotes() {
-        return upvotes;
-    }
-
-    public void setUpvotes(Integer upvotes) {
-        this.upvotes = upvotes;
-    }
-
-    public Integer getDownvotes() {
-        return downvotes;
-    }
-
-    public void setDownvotes(Integer downvotes) {
-        this.downvotes = downvotes;
-    }
-
-    public String getWebUrl() {
-        return webUrl;
-    }
-
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
-
     public List<Comment> getComments() {
         return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override
@@ -247,7 +144,5 @@ public class Issue {
         }
         return sb.toString();
     }
-
-
 
 }

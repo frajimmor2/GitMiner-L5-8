@@ -1,18 +1,26 @@
-package aiss.gitminer.repository;
+package aiss.gitminer.service;
 
 import aiss.gitminer.model.Comment;
 import aiss.gitminer.model.Commit;
 import aiss.gitminer.model.Issue;
 import aiss.gitminer.model.Project;
+import aiss.gitminer.repository.CommentDatabase;
+import aiss.gitminer.repository.CommitDatabase;
+import aiss.gitminer.repository.IssueDatabase;
+import aiss.gitminer.repository.ProjectDatabase;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class GitMinerRepository {
+@Service
+public class GitMinerService {
+
+    @Autowired
+    RestTemplate _template;
 
     @Autowired
     ProjectDatabase projectDatabase;
@@ -28,7 +36,7 @@ public class GitMinerRepository {
         projectDatabase.save(project);
     }
 
-    public List<Project> getAllProjects() {
+    public List<Project> getProjects() {
         return projectDatabase.findAll();
     }
 
@@ -36,7 +44,7 @@ public class GitMinerRepository {
         return projectDatabase.findById(projectId);
     }
 
-    public List<Commit> getAllCommits() {
+    public List<Commit> getCommits() {
         return commitDatabase.findAll();
     }
 
@@ -48,7 +56,7 @@ public class GitMinerRepository {
         return commitDatabase.findByAuthorEmail(email);
     }
 
-    public List<Issue> getAllIssues() {
+    public List<Issue> getIssues() {
         return issueDatabase.findAll();
     }
 
@@ -68,7 +76,7 @@ public class GitMinerRepository {
         return issueDatabase.findByState(state);
     }
 
-    public List<Comment> getAllComments() {
+    public List<Comment> getComments() {
         return commentDatabase.findAll();
     }
 

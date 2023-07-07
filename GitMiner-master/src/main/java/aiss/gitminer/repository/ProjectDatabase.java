@@ -1,8 +1,9 @@
 package aiss.gitminer.repository;
 
-import aiss.gitminer.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import aiss.gitminer.model.Project;
+
 @Repository
-interface ProjectDatabase extends JpaRepository<Project, String> {}
+public interface ProjectDatabase extends JpaRepository<Project, String> {}
