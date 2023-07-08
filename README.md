@@ -13,3 +13,6 @@ Técnicamente el código funciona en su gran mayoría pero un error que nos ha s
 
 # Entrega Julio
 Arreglado el proyecto, con cambios globales porque la primera entrega estaba muy mal hecha y optimizada
+
+# Entrega Julio
+Arreglado el proyecto, con cambios globales porque la primera entrega estaba muy mal hecha y optimizada
